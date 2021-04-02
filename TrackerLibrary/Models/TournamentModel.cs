@@ -12,6 +12,7 @@ namespace TrackerLibrary.Models
     /// </summary>
     public class TournamentModel
     {
+        public event EventHandler<DateTime> OnTournamentComplete;
         /// <summary>
         /// Player id in database.
         /// </summary>
@@ -36,5 +37,10 @@ namespace TrackerLibrary.Models
         /// Number of rounds in tournaments. It will depand on number of teams.
         /// </summary>
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
+
+        public void CompleteTournament()
+        {
+            OnTournamentComplete?.Invoke(this, DateTime.Now);
+        }
     }
 }
